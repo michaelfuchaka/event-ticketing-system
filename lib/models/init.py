@@ -12,7 +12,7 @@ engine =  create_engine(DATABASE_URL, echo=True)
 Base = declarative_base()
 
 # Create session factory
-SessionLocal  = sessionmaker(automatic = False, autoflush =  False, bind = engine)
+SessionLocal  = sessionmaker(autocommit = False, autoflush =  False, bind = engine)
 
 # Function to get database session
 def get_session():

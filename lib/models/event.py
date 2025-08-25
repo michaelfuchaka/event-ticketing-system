@@ -1,6 +1,6 @@
 from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.orm import relationship
-from. import Base, get_session
+from . import Base, get_session
 from datetime import datetime
 
 class Event(Base):
@@ -8,7 +8,7 @@ class Event(Base):
     __tablename__ = 'events'
 
     id = Column(Integer, primary_key=True, autoincrement=True)
-    namwe = Column(String, nullable=False)
+    name = Column(String, nullable=False)
     location = Column(String, nullable=False)
     date = Column(Date, nullable=False)
     capacity = Column(Integer, nullable=False)
@@ -19,9 +19,9 @@ class Event(Base):
     def __repr__(self):
         return f"<Event(id={self.id}, name='{self.name}', location='{self.location}', date='{self.date}', capacity={self.capacity})>"
     
-     # Property methods 
+    # Property methods 
     @property
-    def name_property(self,value):
+    def name_property(self):
         return self._name
     
     # Ensuring name is not empty and doesn’t exceed 100 characters.
@@ -34,7 +34,7 @@ class Event(Base):
         self._name = value.strip()
 
     # Ensuring capacity is a positive integer and doesn’t exceed 10,000.
-    @capacity_property.setter
+    @property
     def capacity_property(self, value):
         if not isinstance(value, int) or value <= 0:
             raise ValueError("Capacity must be a positive integer")
@@ -42,8 +42,8 @@ class Event(Base):
             raise ValueError("Capacity cannot exceed 10,000")
         self._capacity = value
 
-         # ORM 
-        #  Creating a new Event record in the database
+    # ORM 
+    #  Creating a new Event record in the database
     @classmethod
     def create(cls, name, location, date, capacity):
         """Create a new event"""
@@ -84,7 +84,7 @@ class Event(Base):
         finally:
             session.close()
    
-      # Deletes this event from the database
+    # Deletes this event from the database
     def delete(self):
         """Delete this event"""
         session = get_session()
