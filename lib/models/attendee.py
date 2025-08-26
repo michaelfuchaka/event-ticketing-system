@@ -17,7 +17,7 @@ class Attendee(Base):
         return f"<Attendee(id={self.id}, name='{self.name}', contact='{self.contact}')>"
     
     # Property methods
-    # Ensures attendee names are non-empty, ≤100 characters, and only contain letters, spaces, hyphens, and apostrophes
+    # Ensures attendee names are not-empty, ≤100 characters, and only contain letters, spaces, hyphens, and apostrophes
     @property
     def name_property(self):
         return self._name
