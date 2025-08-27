@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, ForeignKey, DateTime
 from sqlalchemy.orm import relationship
 from . import Base, get_session
 from datetime import datetime
+from sqlalchemy.orm import relationship, joinedload
 
 class Ticket(Base):
     __tablename__ = 'tickets'
@@ -74,7 +75,11 @@ class Ticket(Base):
         """Find ticket by ID"""
         session = get_session()
         try:
-            return session.query(cls).filter(cls.id == ticket_id).first()
+          from sqlalchemy.orm import joinedload
+          return session.query(cls).options(
+              joinedload(cls.event),
+              joinedload(cls.attendee)
+           ).filter(cls.id == ticket_id).first()   
         finally:
             session.close()
     
@@ -95,7 +100,10 @@ class Ticket(Base):
         """Get all tickets for a specific event"""
         session = get_session()
         try:
-            return session.query(cls).filter(cls.event_id == event_id).all()
+           from sqlalchemy.orm import joinedload
+           return session.query(cls).options(
+             joinedload(cls.attendee)
+           ).filter(cls.event_id == event_id).all()
         finally:
             session.close()
     

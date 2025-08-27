@@ -2,6 +2,7 @@ from sqlalchemy import Column, Integer, String, Date
 from sqlalchemy.orm import relationship
 from . import Base, get_session
 from datetime import datetime
+from sqlalchemy.orm import relationship, joinedload
 
 class Event(Base):
     # Setting table name to events
@@ -70,7 +71,8 @@ class Event(Base):
         """Get all events"""
         session = get_session()
         try:
-            return session.query(cls).all()
+            from sqlalchemy.orm import joinedload
+            return session.query(cls).options(joinedload(cls.tickets)).all()
         finally:
             session.close()
     
