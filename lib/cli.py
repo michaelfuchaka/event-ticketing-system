@@ -9,8 +9,17 @@ from helpers import (
     find_event_menu,
     find_attendee_menu
 )
+# Import create_tables to ensure database is set up
+from models import create_tables
 
 def main():
+     # Create tables if they don't exist
+    try:
+        create_tables()
+        print("Database initialized successfully!")
+    except Exception as e:
+        print(f"Warning: Database initialization issue: {e}")
+    
     print("\n" + "="*50)
     print("    WELCOME TO EVENT TICKETING SYSTEM")
     print("="*50)

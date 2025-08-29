@@ -6,7 +6,6 @@ name = "pypi"
 [packages]
 click = "*"
 faker = "*"
-ipdb = "*"
 sqlalchemy = "*"
 alembic = "*"
 
