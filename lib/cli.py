@@ -14,29 +14,27 @@ def main():
     print("\n" + "="*50)
     print("    WELCOME TO EVENT TICKETING SYSTEM")
     print("="*50)
-    
+     
+    menu_actions = {
+        "0": exit_program,
+        "1": create_event_menu,
+        "2": book_ticket_menu,
+        "3": cancel_ticket_menu,
+        "4": view_events_menu,
+        "5": view_attendees_menu,
+        "6": view_all_attendees_menu,
+        "7": find_event_menu,
+        "8": find_attendee_menu,
+    }
+
     while True:
         display_menu()
         choice = input("\nEnter your choice (0-8): ").strip()
-        
-        if choice == "0":
-            exit_program()
-        elif choice == "1":
-            create_event_menu()
-        elif choice == "2":
-            book_ticket_menu()
-        elif choice == "3":
-            cancel_ticket_menu()
-        elif choice == "4":
-            view_events_menu()
-        elif choice == "5":
-            view_attendees_menu()
-        elif choice == "6":
-            view_all_attendees_menu()
-        elif choice == "7":
-            find_event_menu()
-        elif choice == "8":
-            find_attendee_menu()
+
+        # Use dictionary lookup instead of if/elif
+        action = menu_actions.get(choice)
+        if action:
+            action()
         else:
             print("\n❌ Invalid choice! Please select a number between 0-8.")
             input("Press Enter to continue...")
@@ -58,3 +56,5 @@ def display_menu():
 
 if __name__ == "__main__":
     main()
+
+

@@ -6,7 +6,7 @@ from sqlalchemy.orm import sessionmaker
 DATABASE_URL = "sqlite:///event_ticketing.db"
 
 # Create Engine
-engine =  create_engine(DATABASE_URL, echo=True)
+engine =  create_engine(DATABASE_URL)
 
 # Create base class for models
 Base = declarative_base()
