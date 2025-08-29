@@ -196,3 +196,6 @@ The application provides informative error messages for common issues:
 5. Submit a pull request
 
 ## License
+
+This project is licensed under the [MIT License](./LICENSE).
+
